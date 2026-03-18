@@ -1,16 +1,27 @@
+import dotenv from 'dotenv'
+dotenv.config()
+
 import express from "express";
 import cors from 'cors'
-import dotenv from 'dotenv'
-
-dotenv.config()
+import db from "./config/db";
 
 // creamos la aplicacio nde express
 const app = express()
 
-app.use(cors({
-    origin: '*'
-})) // permite peticiones desde el frontend
+app.use(cors()) // permite peticiones desde el frontend
 app.use(express.json()) // permite recibir y enviar JSON
+
+const conectarDB = async () => {
+    try {
+        await db.authenticate()
+        console.log('Conexion a la base de datos exitosa')
+    } catch (error) {
+        console.log('Error al conectar a la base de datos')
+        console.log(error)
+    }
+}
+
+conectarDB()
 
 app.get('/api', (req, res) => {
     res.json({msg: 'TableFlow API funcionando'})
