@@ -4,6 +4,7 @@ dotenv.config()
 import express from "express";
 import cors from 'cors'
 import db from "./config/db";
+import productoRoutes from './routes/productoRoutes'
 
 // creamos la aplicacio nde express
 const app = express()
@@ -24,6 +25,8 @@ const conectarDB = async () => {
 }
 
 conectarDB()
+
+app.use('/api/productos', productoRoutes)
 
 app.get('/api', (req, res) => {
     res.json({msg: 'TableFlow API funcionando'})
