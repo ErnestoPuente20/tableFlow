@@ -1,4 +1,5 @@
-import { Sequelize } from "sequelize";
+import { Sequelize } from "sequelize-typescript";
+import Producto from "../models/Producto";
 
 const db = new Sequelize(process.env.DATABASE_URL!, {
     dialect: 'postgres',
@@ -7,7 +8,8 @@ const db = new Sequelize(process.env.DATABASE_URL!, {
             require: true
         }
     },
-    logging: false
+    logging: false,
+    models: [Producto]
 })
 
 export default db

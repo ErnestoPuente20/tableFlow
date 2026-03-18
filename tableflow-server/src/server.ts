@@ -15,6 +15,8 @@ const conectarDB = async () => {
     try {
         await db.authenticate()
         console.log('Conexion a la base de datos exitosa')
+        await db.sync()
+        console.log('Tablas creadas correctamente')
     } catch (error) {
         console.log('Error al conectar a la base de datos')
         console.log(error)
