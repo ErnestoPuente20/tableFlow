@@ -1,10 +1,16 @@
-import {Table, Column, Model, DataType, Default, AllowNull} from 'sequelize-typescript'
+import { Table, Column, Model, DataType, Default, HasMany } from 'sequelize-typescript'
+import ItemPedido from './ItemPedido'
 
-@Table({
-    tableName: 'productos'
-})
-
+@Table({ tableName: 'productos' })
 class Producto extends Model {
+
+    @Column({
+        type: DataType.UUID,
+        defaultValue: DataType.UUIDV4,
+        primaryKey: true
+    })
+    declare id: string
+
     @Column({
         type: DataType.STRING(100),
         allowNull: false
@@ -40,6 +46,9 @@ class Producto extends Model {
         type: DataType.BOOLEAN
     })
     declare disponible: boolean
+
+    @HasMany(() => ItemPedido)
+    declare items: ItemPedido[]
 }
 
 export default Producto
