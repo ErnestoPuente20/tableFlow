@@ -5,6 +5,8 @@ import express from "express";
 import cors from 'cors'
 import db from "./config/db";
 import productoRoutes from './routes/productoRoutes'
+import mesasRoutes from './routes/mesasRoutes'
+import restauranteRoutes from './routes/restaurantesRoutes'
 
 // creamos la aplicacio nde express
 const app = express()
@@ -27,6 +29,8 @@ const conectarDB = async () => {
 conectarDB()
 
 app.use('/api/productos', productoRoutes)
+app.use('/api/mesas', mesasRoutes)
+app.use('/api/restaurantes', restauranteRoutes)
 
 app.get('/api', (req, res) => {
     res.json({msg: 'TableFlow API funcionando'})
